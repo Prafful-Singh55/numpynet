@@ -180,6 +180,7 @@ class NumpyNet:
                 # TODO: try grid sampling instead of random
                 batch_indexes = np.random.choice(available_indexes, self.batch_size, replace=False)
                 batch_in = train_in[batch_indexes, :]
+                batch_in = (train_in[batch_indexes, :] - train_in[batch_indexes, :].mean())/ train_in[batch_indexes, :].std()
                 batch_out = train_out[batch_indexes, :]
                 # Remove these indices from the available pool
                 available_indexes = available_indexes[~np.in1d(available_indexes,
